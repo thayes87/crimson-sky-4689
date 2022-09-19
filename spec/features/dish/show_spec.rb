@@ -22,5 +22,21 @@ RSpec.describe 'Dish Show Page' do
       expect(page).to have_content("avacado")
       expect(page).to have_content("Chef Tom")
     end
+
+    it 'I see the total calorie count for that dish' do
+      @tom = Chef.create!(name: "Tom")
+
+      @toast = @tom.dishes.create!(name: "toast", description: "avacado toast")
+    
+      @bread = Ingredient.create!(name: "bread", calories: 100)
+      @avacado = Ingredient.create!(name: "avacado", calories: 50)
+
+      DishIngredient.create!(dish_id: @toast.id, ingredient_id: @bread.id)
+      DishIngredient.create!(dish_id: @toast.id, ingredient_id: @avacado.id)
+      
+      visit "dishes/#{@toast.id}"
+
+      expect(page).to have_content("Total Calories: 150")
+    end
   end
 end
