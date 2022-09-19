@@ -17,7 +17,7 @@ RSpec.describe 'Dish Show Page' do
 
       expect(page).to have_content("Name: toast")
       expect(page).to have_content("Description: avacado toast")
-      within div
+      
       expect(page).to have_content("bread")
       expect(page).to have_content("avacado")
       expect(page).to have_content("Chef Tom")
